@@ -11,7 +11,7 @@
         </c:if>
         <h2>日報管理システムへようこそ</h2>
         <h3>【自分の日報　一覧】</h3>
-        <table id="report_id">
+        <table id="report_list">
             <tbody>
                 <tr>
                     <th class="report_name">氏名</th>
@@ -30,15 +30,15 @@
             </tbody>
         </table>
 
-        <div id="paggination">
-            (全${reports_count} 件)<br />
+        <div id="pagination">
+            (全 ${reports_count} 件)<br />
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / 15) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/?page=${i}' />"><c:out value="${i}]" /></a>&nbsp;
+                        <a href="<c:url value='/?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>

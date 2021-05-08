@@ -27,7 +27,7 @@ public class ReportValidator {
         }
         return "";
     }
-    public static String _validateContent(String content){
+    private static String _validateContent(String content){
         if(content == null || content.equals("")){
             return "内容を入力してください。";
         }
