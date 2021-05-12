@@ -22,10 +22,10 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
-    private Employee follow;
+    private Employee employee;
 
     @OneToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "follower_id", nullable = false)
     private Employee follower;
 
     @Column(name = "created_at", nullable = false)
@@ -43,12 +43,12 @@ public class Follow {
         this.id = id;
     }
 
-    public Employee getFollow() {
-        return follow;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setFollow(Employee follow) {
-        this.follow = follow;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Employee getFollower() {
