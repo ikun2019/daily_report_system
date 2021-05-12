@@ -44,6 +44,6 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/employees/index' />">トップページに戻る</a></p>
+        <p><a href="<c:url value='/' />">日報一覧に戻る</a></p>
     </c:param>
 </c:import>
