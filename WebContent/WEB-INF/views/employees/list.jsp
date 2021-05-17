@@ -21,8 +21,21 @@
                                 <c:when test="${employee.delete_flag == 1}">
                                     (削除済み)
                                 </c:when>
+                                <c:when test="${followers.contains(employee.getCode())}">
+                                    <label for="followCancelForm${employee.id}"><i class="fas fa-heart"></i></label>
+                                    <form method="POST" name="followForm${employee.id}" action="<c:url value='/follows/destroy' />">
+                                        <input type="hidden" name="_token" value="${_token}" />
+                                        <input type="hidden" name="employeeCode" value="${employee.code}" />
+                                        <input type="submit" id="followCancelForm${employee.id}" style="display: none;" />
+                                    </form>
+                                </c:when>
                                 <c:otherwise>
-                                    <i class="far fa-heart"></i>
+                                    <label for="followForm${employee.id}"><i class="far fa-heart"></i></label>
+                                    <form method="POST" name="followForm${employee.id}" action="<c:url value='/follows/create' />">
+                                        <input type="hidden" name="_token" value="${_token}" />
+                                        <input type="hidden" name="followCode" value="${employee.code}" />
+                                        <input type="submit" id="followForm${employee.id}" style="display: none;" />
+                                    </form>
                                 </c:otherwise>
                             </c:choose>
                         </td>

@@ -9,10 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name="follows")
+@NamedQueries({
+    @NamedQuery(
+            name = "getAllFollowers",
+            query = "SELECT f.followed_Code From Follow AS f WHERE f.follow_id = :login_employee"
+            ),
+    @NamedQuery(
+            name = "getFollower",
+            query = "SELECT f From Follow AS f WHERE f.follow_id = :login_employee AND f.followed_Code = :employeeCode"
+            ),
+})
 @Entity
 public class Follow {
     @Id
@@ -21,12 +32,11 @@ public class Follow {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+    @JoinColumn(name = "follow_id", nullable = false)
+    private Employee follow_id;
 
-    @OneToOne
-    @JoinColumn(name = "follower_id", nullable = false)
-    private Employee follower;
+    @Column(name = "followed_Code", nullable = false)
+    private String followed_Code;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -34,7 +44,7 @@ public class Follow {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
 
-    //getter,setter
+
     public Integer getId() {
         return id;
     }
@@ -43,20 +53,20 @@ public class Follow {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Employee getFollow_id() {
+        return follow_id;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setFollow_id(Employee follow_id) {
+        this.follow_id = follow_id;
     }
 
-    public Employee getFollower() {
-        return follower;
+    public String getFollowed_Code() {
+        return followed_Code;
     }
 
-    public void setFollower(Employee follower) {
-        this.follower = follower;
+    public void setFollowed_Code(String followed_Code) {
+        this.followed_Code = followed_Code;
     }
 
     public Timestamp getCreated_at() {
@@ -74,5 +84,6 @@ public class Follow {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
 
 }

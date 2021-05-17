@@ -38,8 +38,15 @@ public class EmployeesListServlet extends HttpServlet {
         long employees_count = (long)em.createNamedQuery("getEmployeesCount", Long.class)
                 .getSingleResult();
 
-        em.close();
+        //ログインしているユーザーがフォローしている人を取得
+        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+        List<String> followers = em.createNamedQuery("getAllFollowers", String.class)
+                .setParameter("login_employee", login_employee)
+                .getResultList();
 
+        em.close();
+        request.getSession().setAttribute("_token", request.getSession().getId());
+        request.setAttribute("followers", followers);
         request.setAttribute("employees", employees);
         request.setAttribute("employees_count", employees_count);
         request.setAttribute("page", page);
