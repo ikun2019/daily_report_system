@@ -32,7 +32,11 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "searchEmployeeCode",
         query = "SELECT e FROM Employee AS e WHERE e.code = :code"
-    )
+    ),
+    @NamedQuery(
+        name = "searchEmployee",
+        query = "SELECT e FROM Employee AS e WHERE e.id = :employee_id"
+            )
 })
 @Entity
 public class Employee {

@@ -22,7 +22,7 @@
                                     (削除済み)
                                 </c:when>
                                 <c:when test="${followers.contains(employee.getCode())}">
-                                    <label for="followCancelForm${employee.id}"><i class="fas fa-heart"></i></label>
+                                    <label for="followCancelForm${employee.id}"><i class="fas fa-heart" style="color: red;"></i></label>
                                     <form method="POST" name="followForm${employee.id}" action="<c:url value='/follows/destroy' />">
                                         <input type="hidden" name="_token" value="${_token}" />
                                         <input type="hidden" name="employeeCode" value="${employee.code}" />
@@ -30,7 +30,7 @@
                                     </form>
                                 </c:when>
                                 <c:otherwise>
-                                    <label for="followForm${employee.id}"><i class="far fa-heart"></i></label>
+                                    <label for="followForm${employee.id}"><i class="far fa-heart" style="color: red;"></i></label>
                                     <form method="POST" name="followForm${employee.id}" action="<c:url value='/follows/create' />">
                                         <input type="hidden" name="_token" value="${_token}" />
                                         <input type="hidden" name="followCode" value="${employee.code}" />
