@@ -38,18 +38,23 @@ public class FollowsReportsServlet extends HttpServlet {
 
 
 
-        List<Report> followerReports = em.createNamedQuery("getFollowerReports", Report.class)
-                .setParameter("employee", followerId)
+        List<Report> followerReports = em.createNamedQuery("getMyAllReports", Report.class)
+                .setParameter("employee", follower)
                 .setFirstResult(15 * (page - 1))
                 .setMaxResults(15)
                 .getResultList();
 
-//        long followerReports_count = (long)em.createNamedQuery("getMyReportsCount", Long.class)
-//                .setParameter("employee", followerId)
-//                .getSingleResult();
+        long followerReports_count = (long)em.createNamedQuery("getMyReportsCount", Long.class)
+                .setParameter("employee", follower)
+                .getSingleResult();
+
+        em.close();
 
         request.setAttribute("follower", follower);
+        request.setAttribute("followerId", followerId);
         request.setAttribute("followerReports", followerReports);
+        request.setAttribute("followerReports_count", followerReports_count);
+        request.setAttribute("page", page);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follows/reports.jsp");
         rd.forward(request, response);

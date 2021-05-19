@@ -21,5 +21,6 @@
                 </c:forEach>
             </tbody>
         </table>
+        <a href="<c:url value='/follows/report_lists' />">フォロワーの日報一覧を見る</a>
     </c:param>
 </c:import>

@@ -26,7 +26,7 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getFollowersCount",
             query = "SELECT COUNT(f) FROM Follow AS f"
-            )
+            ),
 })
 @Entity
 public class Follow {

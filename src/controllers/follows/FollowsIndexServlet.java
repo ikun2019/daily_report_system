@@ -38,7 +38,6 @@ public class FollowsIndexServlet extends HttpServlet {
                 .setParameter("login_employee", login_employee)
                 .getResultList();
 
-        System.out.println("followersリストの中身：" + followers);
 
         List<Employee> followersEmployee = new ArrayList<Employee>();
 
