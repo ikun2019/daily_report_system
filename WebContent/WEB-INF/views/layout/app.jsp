@@ -7,6 +7,7 @@
         <meta charset="UTF-8">
         <title>日報管理システム</title>
         <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <link rel="stylesheet" href="<c:url value='/css/style.css' />">
     </head>
     <body>
@@ -16,10 +17,17 @@
                 <div id="header_menu">
                     <h1><a href="<c:url value='/' />">日報管理システム</a></h1>&nbsp;&nbsp;&nbsp;
                     <c:if test="${sessionScope.login_employee != null}">
-                        <c:if test="${sessionScope.login_employee.admin_flag == 1}">
-                            <a href="<c:url value='/employees/index'/>">従業員管理</a>&nbsp;
-                        </c:if>
-                        <a href="<c:url value='/reports/index' />">日報管理</a>&nbsp;
+                        <c:choose>
+                            <c:when test="${sessionScope.login_employee.admin_flag == 1}">
+                                <a href="<c:url value='/employees/index'/>">従業員管理</a>&nbsp;
+                                <a href="<c:url value='/reports/index' />">日報管理</a>&nbsp;
+                            </c:when>
+                            <c:otherwise>
+                                <a href="<c:url value='/reports/index' />">日報管理</a>&nbsp;
+                                <a href="<c:url value='/employees/list' />">従業員一覧</a>&nbsp;
+                                <a href="<c:url value='/follows/index' />">フォロー済み従業員</a>&nbsp;
+                            </c:otherwise>
+                        </c:choose>
                     </c:if>
                 </div>
 
