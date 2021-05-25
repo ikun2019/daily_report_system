@@ -18,6 +18,25 @@
 <input type="text" name="name" value="${employee.name}" />
 <br /><br />
 
+<label for="group_id">所属部署</label><br />
+<select name="group_id">
+    <option value="営業部">営業部</option>
+    <option value="総務部">総務部</option>
+    <option value="人事部">人事部</option>
+    <option value="経理部">経理部</option>
+    <option value="その他">その他</option>
+</select>
+<br /><br />
+
+<label for="position">役職</label><br />
+<select name="position">
+    <option value="4">役員</option>
+    <option value="3">部長</option>
+    <option value="2">会長</option>
+    <option value="1">一般</option>
+</select>
+<br /><br />
+
 <label for="password">パスワード</label><br />
 <input type="password" name="password" />
 <br /><br />
