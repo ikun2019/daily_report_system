@@ -32,7 +32,24 @@
                         <td><fmt:formatDate value="${report.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                     </tr>
                 </table>
-
+                <!-- 承認ボタン -->
+                <div class="text-center mt-3">
+                    <c:choose>
+                        <c:when test="${report.approval != null}">
+                            <form method="POST" action="<c:url value='/reports/approved' />">
+                                <input type="submit" class="btn btn-success" value="承認済">
+                                <input type="hidden" name="_token" value="${_token}" />
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form method="POST" action="<c:url value='/reports/approve' />">
+                               <input type="submit" class="btn btn-warning" value="未承認">
+                               <input type="hidden" name="_token" value="${_token}" />
+                               <input type="hidden" name="create_report_id" value="${report.id}" />
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                     <p><a href="<c:url value='/reports/edit?id=${report.id}' />">この日報を編集する</a></p>
                 </c:if>

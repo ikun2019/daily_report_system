@@ -46,6 +46,9 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
+        request.setAttribute("reports", reports);
+        request.setAttribute("reports_count", reports_count);
+
         //ログインしているユーザーが所属している部署の従業員一覧を検索(自分より役職の低い従業員のみ抽出)
         try {
         List<Employee> subordinates = em.createNamedQuery("searchGroupMembers", Employee.class)
@@ -71,8 +74,6 @@ public class TopPageIndexServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("login_employee", login_employee);
-        request.setAttribute("reports", reports);
-        request.setAttribute("reports_count", reports_count);
         request.setAttribute("page", page);
 
         if(request.getSession().getAttribute("flush") != null){
