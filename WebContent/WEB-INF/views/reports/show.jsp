@@ -39,6 +39,7 @@
                             <form method="POST" action="<c:url value='/reports/approved' />">
                                 <input type="submit" class="btn btn-success" value="承認済">
                                 <input type="hidden" name="_token" value="${_token}" />
+                                <input type="hidden" name="destroy_report_id" value="${report.id}" />
                             </form>
                         </c:when>
                         <c:otherwise>
