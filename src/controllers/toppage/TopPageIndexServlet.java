@@ -46,10 +46,34 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
-        em.close();
-
         request.setAttribute("reports", reports);
         request.setAttribute("reports_count", reports_count);
+
+        //ログインしているユーザーが所属している部署の従業員一覧を検索(自分より役職の低い従業員のみ抽出)
+        try {
+        List<Employee> subordinates = em.createNamedQuery("searchGroupMembers", Employee.class)
+                .setParameter("employee_position", login_employee.getPosition())
+                .setParameter("group", login_employee.getGroup_id())
+                .getResultList();
+
+        System.out.println("subordinatesの中身：" + subordinates);
+
+        List<Report> subordinatesReports = em.createNamedQuery("getSubordinateReports", Report.class)
+                .setParameter("employee_id", subordinates)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+                .getResultList();
+
+        System.out.println("subordinatesReportsの中身：" + subordinatesReports);
+
+        request.setAttribute("subordinatesReports", subordinatesReports);
+        request.setAttribute("page", page);
+        } catch(Exception e) {}
+
+
+        em.close();
+
+        request.setAttribute("login_employee", login_employee);
         request.setAttribute("page", page);
 
         if(request.getSession().getAttribute("flush") != null){

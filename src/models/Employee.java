@@ -36,7 +36,11 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "searchEmployee",
         query = "SELECT e FROM Employee AS e WHERE e.id = :employee_id"
-            )
+    ),
+    @NamedQuery(
+        name = "searchGroupMembers",
+        query = "SELECT e FROM Employee AS e WHERE e.group_id IN :group AND e.position < :employee_position"
+    )
 })
 @Entity
 public class Employee {
@@ -50,6 +54,12 @@ public class Employee {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name="group_id", nullable = false)
+    private String group_id;
+
+    @Column(name="position", nullable = false)
+    private Integer position;
 
     @Column(name = "password", length = 64, nullable = false)
     private String password;
@@ -88,6 +98,23 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getGroup_id() {
+        return group_id;
+    }
+
+    public void setGroup_id(String group_id) {
+        this.group_id = group_id;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
     public String getPassword() {

@@ -40,6 +40,14 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getFollowersReportsCount",
             query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee IN :employees"
+            ),
+    @NamedQuery(
+            name = "getSubordinateReports",
+            query = "SELECT r FROM Report AS r WHERE r.employee IN :employee_id"
+            ),
+    @NamedQuery(
+            name = "searchReport",
+            query = "SELECT r FROM Report AS r WHERE r.id = :report_id"
             )
 })
 @Entity
@@ -62,6 +70,9 @@ public class Report {
     @Lob
     @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "approval")
+    private Integer approval;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -107,6 +118,14 @@ public class Report {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getApproval() {
+        return approval;
+    }
+
+    public void setApproval(Integer approval) {
+        this.approval = approval;
     }
 
     public Timestamp getCreated_at() {

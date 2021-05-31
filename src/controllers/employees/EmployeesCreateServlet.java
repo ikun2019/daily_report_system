@@ -34,6 +34,8 @@ public class EmployeesCreateServlet extends HttpServlet {
 
             e.setCode(request.getParameter("code"));
             e.setName(request.getParameter("name"));
+            e.setGroup_id(request.getParameter("group_id"));
+            e.setPosition(Integer.parseInt(request.getParameter("position")));
             e.setPassword(
                     EncryptUtil.getPasswordEncrypt(
                             request.getParameter("password"),
