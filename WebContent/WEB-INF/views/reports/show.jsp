@@ -32,6 +32,28 @@
                         <td><fmt:formatDate value="${report.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                     </tr>
                 </table>
+                <!-- いいね機能 -->
+                <div class="good_button text-right" style="font-size: 20px;">
+                    <c:out value="${likes_count}" />
+                    <c:choose>
+                        <c:when test="${like >= 1}">
+                            <label for="likes_destroy"><i class="fas fa-thumbs-up"></i></label>
+                            <form method="POST" name="likes_destroy" action="<c:url value='/likes/destroy' />">
+                                <input type="hidden" name="_token" value="${_token}" />
+                                <input type="hidden" name="report_id" value="${report.id}" />
+                                <input type="submit" id="likes_destroy" style="display:none;" />
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <label for="likes_create"><i class="far fa-thumbs-up"></i></label>
+                            <form method="POST" name="likes_create" action="<c:url value='/likes/create' />">
+                                <input type="hidden" name="_token" value="${_token}" />
+                                <input type="hidden" name="report_id" value="${report.id}" />
+                                <input type="submit" id="likes_create" style="display:none;" />
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
                 <!-- 承認ボタン -->
                 <div class="text-center mt-3">
                     <c:choose>
